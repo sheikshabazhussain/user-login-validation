@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+
+<link rel="stylesheet" 
+href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+crossorigin="anonymous">
+
+<title>login form</title>
+<style>
+        body {
+            height: 100vh;
+            margin: 0%;
+            display: grid;
+            ;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(54, 98, 143, 0.9), rgba(10, 104, 106, 0.9), rgba(37, 198, 61, 0.9), rgba(193, 105, 47, 0.9), rgba(74, 21, 199, 0.9));
+            animation: gradient 10s ease infinite;
+            background-size: 500% 500%;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+
+        }
+        .btn 
+        {
+         
+            display: grid;
+            border-radius:10px;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(54, 98, 143, 0.9), rgba(10, 104, 106, 0.9), rgba(37, 198, 61, 0.9), rgba(193, 105, 47, 0.9), rgba(74, 21, 199, 0.9));
+            animation: gradient 10s ease infinite;
+            background-size: 500% 500%;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+</style>
+
+</head>
+<body>
+<div class="container">
+<div class="row mt-5">
+<div class="col-md-6 offset-md-3">
+
+<h1 class="text-center">Sign up</h1>
+<form th:action="@{/process}" method="post" th:object="${login}">
+  <div class="form-group">
+    <label for="exampleInputEmail1">username</label>
+    
+    <input type="text"
+    name="username" 
+    class="form-control" 
+    
+    th:value="${login.username}"
+    th:classappend="${#fields.hasErrors('username')?'is-invalid':''}"
+    
+    
+    id="exampleInputEmail1" 
+    aria-describedby="emailHelp" 
+    placeholder="Enter username">
+    
+      <div th:each="e:${#fields.errors('username')}" th:text="${e}" class="invalid-feedback text-white">
+   
+      </div>
+    
+    
+  </div>
+  
+  
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input 
+    type="password"
+    name="password" 
+    
+    th:value="${login.password}"
+      th:classappend="${#fields.hasErrors('password')?'is-invalid':''}"
+    
+    
+    class="form-control" 
+    id="exampleInputPassword1" 
+    placeholder="Enter password">
+    
+    
+      <div th:each="e:${#fields.errors('password')}" th:text="${e}" class="invalid-feedback text-white"></div>
+   
+  </div>
+  
+  <div 
+  class="form-check">
+    <input 
+     th:classappend="${#fields.hasErrors('agreed')?'is-invalid':''}"
+    name="agreed"
+    type="checkbox"  
+    class="form-check-input" 
+    id="exampleCheck1">
+    <label 
+    class="form-check-label text-white" 
+    for="exampleCheck1">Terms and conditions</label>
+    
+    <div th:each="e:${#fields.errors('agreed')}" th:text="${e}" class="invalid-feedback text-white"></div>
+    
+  </div>
+  
+  <button type="submit" 
+  class="btn btn-default mt-2 text-white">Submit</button>
+</form>
+</div>
+</div>
+</div> 
+</body>
+</html>
